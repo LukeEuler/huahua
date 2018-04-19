@@ -1,0 +1,12 @@
+[package]
+name = "huahua"
+version = "0.1.0"
+authors = ["LukeEuler <luke16times@gmail.com>"]
+
+[dependencies]
+clap = "2.31.2"
+image = "0.18.0"
+rustagram = "0.1.0"
+config = "0.8"
+serde_json = "1.0"
+serde = "1.0"

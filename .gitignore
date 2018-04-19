@@ -1,0 +1,11 @@
+# os
+.DS_Store
+
+# ide
+.idea
+
+# test
+pics
+
+/target/
+**/*.rs.bk

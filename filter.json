@@ -1,0 +1,269 @@
+{
+  "1977": [
+    {
+      "blend": "screen",
+      "background": [{"fill_with_channels": [243, 106, 188, 76]}],
+      "foreground": [
+        {"contrast": 10},
+        {"brighten_by_percent": 10},
+        {"saturate": 30}
+      ]
+    }
+  ],
+  "aden": [
+    {"huerotate": -20},
+    {"contrast": -10},
+    {"saturate": -20},
+    {"brighten_by_percent": 20},
+    {"opaque": true}
+  ],
+  "brannan": [
+    {
+      "blend": "lighten",
+      "background": [
+        {"sepia": 20},
+        {"contrast": 20}
+      ],
+      "foreground": [{"fill_with_channels": [161, 44, 199, 59]}]
+    }
+  ],
+  "brooklyn": [
+    {
+      "blend": "overlay",
+      "background": [
+        {"contrast": -10},
+        {"brighten_by_percent": 10},
+        {"opaque": true}
+      ],
+      "foreground": [{"fill_with_channels": [168, 223, 193, 150]}]
+    }
+  ],
+  "clarendon": [
+    {
+      "blend": "overlay",
+      "background": [
+        {"contrast": 20},
+        {"saturate": 35}
+      ],
+      "foreground": [{"fill_with_channels": [127, 187, 227, 101]}]
+    }
+  ],
+  "earlybird": [
+    {
+      "blend": "overlay",
+      "background": [{"fill_with_channels": [208, 186, 142, 150]}],
+      "foreground": [
+        {"contrast": -10},
+        {"sepia": 5}
+      ]
+    },
+    {"opaque": true}
+  ],
+  "gingham": [
+    {
+      "blend": "soft_light",
+      "background": [
+        {"brighten_by_percent": 5},
+        {"huerotate": -10}
+      ],
+      "foreground": [{"fill_with_channels": [230, 230, 230, 255]}]
+    }
+  ],
+  "hudson": [
+    {
+      "blend": "multiply",
+      "background": [
+        {"brighten_by_percent": 50},
+        {"contrast": -10},
+        {"saturate": 10}
+      ],
+      "foreground": [{"fill_with_channels": [166, 177, 255, 208]}]
+    },
+    {"opaque": true}
+  ],
+  "inkwell": [
+    {"sepia": 30},
+    {"contrast": 10},
+    {"brighten_by_percent": 10},
+    {"huerotate": -20},
+    {"grayscale": true}
+  ],
+  "kelvin": [
+    {
+      "blend": "overlay",
+      "background": [
+        {
+          "blend": "color_dodge",
+          "background": [{"fill_with_channels": [56, 44, 52, 255]}],
+          "foreground": []
+        }
+      ],
+      "foreground": [{"fill_with_channels": [183, 125, 33, 255]}]
+    }
+  ],
+  "lark": [
+    {
+      "blend": "darken",
+      "background": [
+        {
+          "blend": "color_dodge",
+          "background": [{"fill_with_channels": [34, 37, 63, 255]}],
+          "foreground": [{"contrast": -10}]
+        }
+      ],
+      "foreground": [{"fill_with_channels": [242, 242, 242, 204]}]
+    }
+  ],
+  "lofi": [
+    {"saturate": 10},
+    {"contrast": 50}
+  ],
+  "maven": [
+    {"sepia": 25},
+    {"brighten_by_percent": -0.05},
+    {"contrast": -0.05},
+    {"saturate": 50}
+  ],
+  "mayfair": [
+    {
+      "blend": "overlay",
+      "background": [
+        {"contrast": 10},
+        {"saturate": 10}
+      ],
+      "foreground": [{"fill_with_channels": [255, 200, 200, 153]}]
+    }
+  ],
+  "moon": [
+    {
+      "blend": "lighten",
+      "background": [
+        {
+          "blend": "soft_light",
+          "background": [
+            {"contrast": 10},
+            {"brighten_by_percent": 10}
+          ],
+          "foreground": [{"fill_with_channels": [160, 160, 160, 255]}]
+        }
+      ],
+      "foreground": [{"fill_with_channels": [56, 56, 56, 255]}]
+    },
+    {"grayscale": true}
+  ],
+  "nashville": [
+    {
+      "blend": "lighten",
+      "background": [
+        {
+          "blend": "darken",
+          "background": [
+            {"sepia": 2},
+            {"contrast": 20},
+            {"brighten_by_percent": 5},
+            {"saturate": 20}
+          ],
+          "foreground": [{"fill_with_channels": [247, 176, 153, 243]}]
+        }
+      ],
+      "foreground": [{"fill_with_channels": [0, 70, 150, 230]}]
+    }
+  ],
+  "reyes": [
+    {
+      "blend": "over",
+      "background": [
+        {"sepia": 22},
+        {"brighten_by_percent": 10},
+        {"contrast": -15},
+        {"saturate": -25}
+      ],
+      "foreground": [{"fill_with_channels": [239, 205, 173, 10]}]
+    }
+  ],
+  "rise": [
+    {
+      "blend": "over",
+      "background": [
+      ],
+      "foreground": [
+        {
+          "blend": "overlay",
+          "background": [
+            {
+              "blend": "multiply",
+              "background": [
+                {"brighten_by_percent": 5},
+                {"sepia": 5},
+                {"contrast": -10},
+                {"saturate": -10}
+              ],
+              "foreground": [{"fill_with_channels": [236, 205, 169, 240]}]
+            }
+          ],
+          "foreground": [{"fill_with_channels": [232, 197, 152, 10]}]
+        }
+      ]
+    }
+  ],
+  "slumber": [
+    {
+      "blend": "soft_light",
+      "background": [
+        {
+          "blend": "lighten",
+          "background": [
+            {"saturate": -34},
+            {"brighten_by_percent": 5}
+          ],
+          "foreground": [{"fill_with_channels": [69, 41, 12, 102]}]
+        }
+      ],
+      "foreground": [{"fill_with_channels": [125, 105, 24, 128]}]
+    }
+  ],
+  "stinson": [
+    {
+      "blend": "soft_light",
+      "background": [
+        {"contrast": -25},
+        {"saturate": -15},
+        {"brighten_by_percent": 15}
+      ],
+      "foreground": [{"fill_with_channels": [240, 149, 128, 51]}]
+    }
+  ],
+  "toaster": [
+    {
+      "blend": "screen",
+      "background": [
+        {"contrast": 20},
+        {"brighten_by_percent": -10}
+      ],
+      "foreground": [{"fill_with_channels": [128, 78, 15, 140]}]
+    }
+  ],
+  "valencia": [
+    {
+      "blend": "exclusion",
+      "background": [
+        {"contrast": 8},
+        {"brighten_by_percent": 8},
+        {"sepia": 8}
+      ],
+      "foreground": [{"fill_with_channels": [58, 3, 57, 128]}]
+    }
+  ],
+  "walden": [
+    {
+      "blend": "screen",
+      "background": [
+        {"brighten_by_percent": 10},
+        {"huerotate": -10},
+        {"saturate": 60},
+        {"sepia": 5}
+      ],
+      "foreground": [{"fill_with_channels": [0, 88, 244, 77]}]
+    }
+  ]
+}
