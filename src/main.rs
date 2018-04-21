@@ -20,7 +20,7 @@ fn main() {
 }
 
 fn args_check() -> (image::DynamicImage, String, serde_json::Value) {
-    let matches = App::new("Pipimi")
+    let matches = App::new("huahua")
         .version("0.1.0")
         .author("Luke Euler <luke16times@gmail.com>")
         .about("Apply custom filters to you photos")

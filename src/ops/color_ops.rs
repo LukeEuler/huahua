@@ -6,7 +6,6 @@ use std::process;
 use std::collections::HashMap;
 use ops::filters;
 
-
 pub fn apply_ops(img: RgbaImage, value: serde_json::Map<String, serde_json::Value>) -> RgbaImage {
     let mut ops_map: HashMap<String, ColorOps> = HashMap::new();
     ops_map.insert("huerotate".to_string(), ColorOps::Huerotate);
