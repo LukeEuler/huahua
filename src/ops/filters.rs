@@ -2,7 +2,7 @@ extern crate image;
 
 use image::{GenericImage, ImageBuffer, Pixel, Rgba};
 use image::math::utils::clamp;
-use ops::blend;
+use ops::blend_points;
 
 #[allow(dead_code)]
 pub fn brighten_by_percent<I, P>(image: &I, value: f32) -> ImageBuffer<P, Vec<u8>>
@@ -115,7 +115,7 @@ pub fn over<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     for (x, y, pixel) in out.enumerate_pixels_mut() {
         let fg_data = foreground.get_pixel(x, y).data;
         let bg_data = background.get_pixel(x, y).data;
-        let final_alpha = blend::compute_final_alpha(&fg_data, &bg_data);
+        let final_alpha = blend_points::compute_final_alpha(&fg_data, &bg_data);
         let mut final_data = [0; 4];
         final_data[3] = final_alpha;
         for i in 0..3 {
@@ -134,112 +134,112 @@ pub fn over<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
 pub fn blend_screen<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_screen)
+    process_blend(foreground, background, &blend_points::blend_screen)
 }
 
 #[allow(dead_code)]
 pub fn blend_soft_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_soft_light)
+    process_blend(foreground, background, &blend_points::blend_soft_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_overlay<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_overlay)
+    process_blend(foreground, background, &blend_points::blend_overlay)
 }
 
 #[allow(dead_code)]
 pub fn blend_color_dodge<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_color_dodge)
+    process_blend(foreground, background, &blend_points::blend_color_dodge)
 }
 
 #[allow(dead_code)]
 pub fn blend_darken<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_darken)
+    process_blend(foreground, background, &blend_points::blend_darken)
 }
 
 #[allow(dead_code)]
 pub fn blend_lighten<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_lighten)
+    process_blend(foreground, background, &blend_points::blend_lighten)
 }
 
 #[allow(dead_code)]
 pub fn blend_multiply<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_multiply)
+    process_blend(foreground, background, &blend_points::blend_multiply)
 }
 
 #[allow(dead_code)]
 pub fn blend_color_burn<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_color_burn)
+    process_blend(foreground, background, &blend_points::blend_color_burn)
 }
 
 #[allow(dead_code)]
 pub fn blend_linear_burn<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_linear_burn)
+    process_blend(foreground, background, &blend_points::blend_linear_burn)
 }
 
 #[allow(dead_code)]
 pub fn blend_linear_dodge<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_linear_dodge)
+    process_blend(foreground, background, &blend_points::blend_linear_dodge)
 }
 
 #[allow(dead_code)]
 pub fn blend_hard_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_hard_light)
+    process_blend(foreground, background, &blend_points::blend_hard_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_vivid_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_vivid_light)
+    process_blend(foreground, background, &blend_points::blend_vivid_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_linear_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_linear_light)
+    process_blend(foreground, background, &blend_points::blend_linear_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_pin_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_pin_light)
+    process_blend(foreground, background, &blend_points::blend_pin_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_difference<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_difference)
+    process_blend(foreground, background, &blend_points::blend_difference)
 }
 
 #[allow(dead_code)]
 pub fn blend_exclusion<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend::blend_exclusion)
+    process_blend(foreground, background, &blend_points::blend_exclusion)
 }
 
 fn process_blend<I>(foreground: &I, background: &I, f: &Fn(u8, u8) -> u8) -> ImageBuffer<Rgba<u8>, Vec<u8>>
@@ -253,7 +253,7 @@ fn process_blend<I>(foreground: &I, background: &I, f: &Fn(u8, u8) -> u8) -> Ima
         let final_r = f(fg_data[0], bg_data[0]);
         let final_g = f(fg_data[1], bg_data[1]);
         let final_b = f(fg_data[2], bg_data[2]);
-        let final_alpha = blend::compute_final_alpha(&fg_data, &bg_data);
+        let final_alpha = blend_points::compute_final_alpha(&fg_data, &bg_data);
         *pixel = Rgba([final_r, final_g, final_b, final_alpha]);
     }
 

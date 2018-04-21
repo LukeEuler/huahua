@@ -1,17 +1,16 @@
-extern crate huahua;
 extern crate clap;
-extern crate config;
+extern crate huahua;
 extern crate image;
-extern crate serde;
 extern crate serde_json;
 
-
-use clap::{Arg, App};
 use std::process;
-use huahua::ops::apply;
 use std::fs::File;
 use std::path::Path;
 use std::error::Error;
+
+use clap::{Arg, App};
+
+use huahua::ops::apply;
 
 
 fn main() {
