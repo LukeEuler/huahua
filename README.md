@@ -89,6 +89,8 @@ OPTIONS:
 | saturate            | -100~100的浮点数             | 饱和度                              |
 | sepia               | -100~100的浮点数             | 色温                                |
 
+> fill_with_channels 相对比较特殊。她只接受图片的size作为输入，输出一张相同size的图片。原本图片的内容不被保留。一般而言，她都是与`blend filter`配合使用。
+
 ### blend filter
 
 | Name         | 说明 |
