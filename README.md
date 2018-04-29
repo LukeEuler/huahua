@@ -76,6 +76,8 @@ OPTIONS:
 
 # 滤镜列表
 
+### basic filter
+
 | Name                | 参数                         | 说明                                |
 | :------------------ | :--------------------------- | ----------------------------------- |
 | brighten_by_percent | -100~100的浮点数             | 按百分比提高亮度                    |
@@ -87,3 +89,23 @@ OPTIONS:
 | saturate            | -100~100的浮点数             | 饱和度                              |
 | sepia               | -100~100的浮点数             | 色温                                |
 
+### blend filter
+
+| Name         | 说明 |
+| ------------ | ---- |
+| color_burn   |      |
+| color_dodge  |      |
+| darken       |      |
+| difference   |      |
+| exclusion    |      |
+| lighten      |      |
+| linear_burn  |      |
+| linear_dodge |      |
+| linear_light |      |
+| multiply     |      |
+| over         |      |
+| overlay      |      |
+| pin_light    |      |
+| screen       |      |
+| soft_light   |      |
+| vivid_light  |      |

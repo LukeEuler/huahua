@@ -107,31 +107,10 @@ pub fn restore_transparency<I>(image: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
 }
 
 #[allow(dead_code)]
-pub fn blend_over<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+pub fn blend_color_burn<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend_points::blend_over)
-}
-
-#[allow(dead_code)]
-pub fn blend_screen<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
-{
-    process_blend(foreground, background, &blend_points::blend_screen)
-}
-
-#[allow(dead_code)]
-pub fn blend_soft_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
-{
-    process_blend(foreground, background, &blend_points::blend_soft_light)
-}
-
-#[allow(dead_code)]
-pub fn blend_overlay<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
-{
-    process_blend(foreground, background, &blend_points::blend_overlay)
+    process_blend(foreground, background, &blend_points::blend_color_burn)
 }
 
 #[allow(dead_code)]
@@ -149,24 +128,31 @@ pub fn blend_darken<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, 
 }
 
 #[allow(dead_code)]
+pub fn blend_difference<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+    where I: GenericImage<Pixel=Rgba<u8>>
+{
+    process_blend(foreground, background, &blend_points::blend_difference)
+}
+
+#[allow(dead_code)]
+pub fn blend_exclusion<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+    where I: GenericImage<Pixel=Rgba<u8>>
+{
+    process_blend(foreground, background, &blend_points::blend_exclusion)
+}
+
+#[allow(dead_code)]
+pub fn blend_hard_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+    where I: GenericImage<Pixel=Rgba<u8>>
+{
+    process_blend(foreground, background, &blend_points::blend_hard_light)
+}
+
+#[allow(dead_code)]
 pub fn blend_lighten<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
     process_blend(foreground, background, &blend_points::blend_lighten)
-}
-
-#[allow(dead_code)]
-pub fn blend_multiply<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
-{
-    process_blend(foreground, background, &blend_points::blend_multiply)
-}
-
-#[allow(dead_code)]
-pub fn blend_color_burn<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
-{
-    process_blend(foreground, background, &blend_points::blend_color_burn)
 }
 
 #[allow(dead_code)]
@@ -184,24 +170,31 @@ pub fn blend_linear_dodge<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba
 }
 
 #[allow(dead_code)]
-pub fn blend_hard_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
-{
-    process_blend(foreground, background, &blend_points::blend_hard_light)
-}
-
-#[allow(dead_code)]
-pub fn blend_vivid_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
-{
-    process_blend(foreground, background, &blend_points::blend_vivid_light)
-}
-
-#[allow(dead_code)]
 pub fn blend_linear_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
     process_blend(foreground, background, &blend_points::blend_linear_light)
+}
+
+#[allow(dead_code)]
+pub fn blend_multiply<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+    where I: GenericImage<Pixel=Rgba<u8>>
+{
+    process_blend(foreground, background, &blend_points::blend_multiply)
+}
+
+#[allow(dead_code)]
+pub fn blend_over<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+    where I: GenericImage<Pixel=Rgba<u8>>
+{
+    process_blend(foreground, background, &blend_points::blend_over)
+}
+
+#[allow(dead_code)]
+pub fn blend_overlay<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+    where I: GenericImage<Pixel=Rgba<u8>>
+{
+    process_blend(foreground, background, &blend_points::blend_overlay)
 }
 
 #[allow(dead_code)]
@@ -212,17 +205,24 @@ pub fn blend_pin_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8
 }
 
 #[allow(dead_code)]
-pub fn blend_difference<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+pub fn blend_screen<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend_points::blend_difference)
+    process_blend(foreground, background, &blend_points::blend_screen)
 }
 
 #[allow(dead_code)]
-pub fn blend_exclusion<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+pub fn blend_soft_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    process_blend(foreground, background, &blend_points::blend_exclusion)
+    process_blend(foreground, background, &blend_points::blend_soft_light)
+}
+
+#[allow(dead_code)]
+pub fn blend_vivid_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+    where I: GenericImage<Pixel=Rgba<u8>>
+{
+    process_blend(foreground, background, &blend_points::blend_vivid_light)
 }
 
 fn process_blend<I>(foreground: &I, background: &I, f: &Fn(u8, u8) -> u8) -> ImageBuffer<Rgba<u8>, Vec<u8>>
