@@ -8,14 +8,14 @@ use ops::filters;
 
 pub fn apply_ops(img: RgbaImage, value: serde_json::Map<String, serde_json::Value>) -> RgbaImage {
     let mut ops_map: HashMap<String, ColorOps> = HashMap::new();
-    ops_map.insert("huerotate".to_string(), ColorOps::Huerotate);
-    ops_map.insert("contrast".to_string(), ColorOps::Contrast);
-    ops_map.insert("saturate".to_string(), ColorOps::Saturate);
     ops_map.insert("brighten_by_percent".to_string(), ColorOps::BrightenByPercent);
-    ops_map.insert("opaque".to_string(), ColorOps::Opaque);
+    ops_map.insert("contrast".to_string(), ColorOps::Contrast);
     ops_map.insert("fill_with_channels".to_string(), ColorOps::FillWithChannels);
-    ops_map.insert("sepia".to_string(), ColorOps::Sepia);
     ops_map.insert("grayscale".to_string(), ColorOps::Grayscale);
+    ops_map.insert("huerotate".to_string(), ColorOps::Huerotate);
+    ops_map.insert("opaque".to_string(), ColorOps::Opaque);
+    ops_map.insert("saturate".to_string(), ColorOps::Saturate);
+    ops_map.insert("sepia".to_string(), ColorOps::Sepia);
 
     let mut out = img.clone();
     if value.len() != 1 {
@@ -25,14 +25,14 @@ pub fn apply_ops(img: RgbaImage, value: serde_json::Map<String, serde_json::Valu
     for (name, v) in value {
         let op: ColorOps = ops_map.get(&name).unwrap().clone();
         out = match op {
-            ColorOps::Contrast => do_contrast(&out, v),
-            ColorOps::Huerotate => do_huerotate(&out, v),
             ColorOps::BrightenByPercent => do_brighten_by_percent(&out, v),
-            ColorOps::Saturate => do_saturate(&out, v),
-            ColorOps::Opaque => do_opaque(&out),
+            ColorOps::Contrast => do_contrast(&out, v),
             ColorOps::FillWithChannels => do_fill_with_channels(&out, v),
-            ColorOps::Sepia => do_sepia(&out, v),
             ColorOps::Grayscale => do_grayscale(&out),
+            ColorOps::Huerotate => do_huerotate(&out, v),
+            ColorOps::Opaque => do_opaque(&out),
+            ColorOps::Saturate => do_saturate(&out, v),
+            ColorOps::Sepia => do_sepia(&out, v),
         }
     }
     out
@@ -40,14 +40,14 @@ pub fn apply_ops(img: RgbaImage, value: serde_json::Map<String, serde_json::Valu
 
 #[derive(Clone)]
 pub enum ColorOps {
-    Contrast,
-    Huerotate,
     BrightenByPercent,
-    Saturate,
-    Opaque,
+    Contrast,
     FillWithChannels,
-    Sepia,
     Grayscale,
+    Huerotate,
+    Opaque,
+    Saturate,
+    Sepia,
 }
 
 pub fn do_contrast(img: &RgbaImage, value: serde_json::Value) -> RgbaImage {
