@@ -12,7 +12,7 @@ pub fn brighten_by_percent<I, P>(image: &I, value: f32) -> ImageBuffer<P, Vec<u8
     let mut out = ImageBuffer::new(width, height);
 
     let max = u8::max_value();
-    let max: f32 =  max as f32;
+    let max: f32 = max as f32;
     let percent = (value + 100.0) / 100.0;
 
     for y in 0..height {
@@ -107,27 +107,10 @@ pub fn restore_transparency<I>(image: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
 }
 
 #[allow(dead_code)]
-pub fn over<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+pub fn blend_over<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     where I: GenericImage<Pixel=Rgba<u8>>
 {
-    let (width, height) = foreground.dimensions();
-    let mut out = ImageBuffer::new(width, height);
-    for (x, y, pixel) in out.enumerate_pixels_mut() {
-        let fg_data = foreground.get_pixel(x, y).data;
-        let bg_data = background.get_pixel(x, y).data;
-        let final_alpha = blend_points::compute_final_alpha(&fg_data, &bg_data);
-        let mut final_data = [0; 4];
-        final_data[3] = final_alpha;
-        for i in 0..3 {
-            let fg_c = fg_data[i] as f32 / 255.0;
-            let bg_c = bg_data[i] as f32 / 255.0;
-            let final_c = fg_c + bg_c * (1.0 - fg_c);
-            final_data[i] = (final_c * 255.0) as u8;
-        }
-        *pixel = Rgba(final_data);
-    }
-
-    out
+    process_blend(foreground, background, &blend_points::blend_over)
 }
 
 #[allow(dead_code)]
@@ -253,7 +236,7 @@ fn process_blend<I>(foreground: &I, background: &I, f: &Fn(u8, u8) -> u8) -> Ima
         let final_r = f(fg_data[0], bg_data[0]);
         let final_g = f(fg_data[1], bg_data[1]);
         let final_b = f(fg_data[2], bg_data[2]);
-        let final_alpha = blend_points::compute_final_alpha(&fg_data, &bg_data);
+        let final_alpha = blend_points::blend_over(fg_data[3], bg_data[3]);
         *pixel = Rgba([final_r, final_g, final_b, final_alpha]);
     }
 
@@ -286,7 +269,7 @@ fn rgb_to_hls(rgba: &[u8; 4]) -> [f32; 3] {
     let lumination = (max + min) / 2.0;
 
     if max == min {
-        return [hue, lumination, saturation]
+        return [hue, lumination, saturation];
     }
 
     let delta = max - min;
@@ -309,7 +292,7 @@ fn rgb_to_hls(rgba: &[u8; 4]) -> [f32; 3] {
         hue += 1.0;
     }
 
-    return [hue, lumination, saturation]
+    return [hue, lumination, saturation];
 }
 
 #[allow(dead_code)]
@@ -333,7 +316,7 @@ pub fn saturate<I>(image: &I, value: f32) -> ImageBuffer<Rgba<u8>, Vec<u8>>
 
 #[allow(dead_code)]
 fn hls_to_rgb(hsl: &[f32; 3], alpha: u8) -> [u8; 4] {
-    let (r,g,b,m1,m2);
+    let (r, g, b, m1, m2);
     let hue = hsl[0];
     let lumination = hsl[1];
     let saturation = hsl[2];
@@ -348,9 +331,9 @@ fn hls_to_rgb(hsl: &[f32; 3], alpha: u8) -> [u8; 4] {
             m2 = lumination + saturation - lumination * saturation;
         }
         m1 = 2.0 * lumination - m2;
-        r = hue_to_rgb(m1, m2, hue + (1.0/3.0));
+        r = hue_to_rgb(m1, m2, hue + (1.0 / 3.0));
         g = hue_to_rgb(m1, m2, hue);
-        b = hue_to_rgb(m1, m2, hue - (1.0/3.0));
+        b = hue_to_rgb(m1, m2, hue - (1.0 / 3.0));
     }
 
     let red = (r * 255.0) as u8;
@@ -368,13 +351,13 @@ fn hue_to_rgb(m1: f32, m2: f32, hue: f32) -> f32 {
     }
 
     if (6.0 * hue) < 1.0 {
-        return m1 + (m2 - m1) * hue * 6.0
+        return m1 + (m2 - m1) * hue * 6.0;
     } else if (2.0 * hue) < 1.0 {
-        return m2
+        return m2;
     } else if (3.0 * hue) < 2.0 {
-        return m1 + (m2 - m1) * ((2.0/3.0) - hue) * 6.0
+        return m1 + (m2 - m1) * ((2.0 / 3.0) - hue) * 6.0;
     } else {
-        return m1
+        return m1;
     }
 }
 

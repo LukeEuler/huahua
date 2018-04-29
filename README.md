@@ -83,6 +83,7 @@ OPTIONS:
 | fill_with_channels  | [r,g,b,a]，0~255的浮点数     | 使用颜色滤镜,`[255, 200, 200, 153]` |
 | grayscale           | 无                           | 变成灰度图                          |
 | huerotate           | 0～360整数(其实负数也可以啦) | 色相偏转                            |
+| opaque              | 无                           | 设为不透明                          |
 | saturate            | -100~100的浮点数             | 饱和度                              |
 | sepia               | -100~100的浮点数             | 色温                                |
 
