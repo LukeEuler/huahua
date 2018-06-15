@@ -10,16 +10,13 @@ mod color_ops;
 mod blend_ops;
 
 pub fn apply(mut img: RgbaImage, value: serde_json::Value) -> RgbaImage {
-    match value.as_array() {
-        Some(array) => {
-            for item in array {
-                img = apply_object(img, item.clone())
-            }
+    if let Some(array) = value.as_array() {
+        for item in array {
+            img = apply_object(img, item.clone())
         }
-        None => {
-            eprintln!("not array! {:?}", value.to_string());
-            process::exit(1);
-        }
+    } else {
+        eprintln!("not array! {:?}", value.to_string());
+        process::exit(1);
     }
     img
 }
@@ -32,16 +29,13 @@ pub fn apply_object(img: RgbaImage, value: serde_json::Value) -> RgbaImage {
             process::exit(1);
         }
     };
-    match map.get("blend") {
-        Some(item) => {
-            let foreground = map.get("foreground").unwrap().clone();
-            let ff = apply(img.clone(), foreground).clone();
-            let background = value.get("background").unwrap().clone();
-            let bb = apply(img.clone(), background).clone();
-            let name = item.as_str().unwrap().to_string();
-            return blend_ops::apply_blend(name, ff, bb);
-        }
-        None => {}
+    if let Some(item) = map.get("blend") {
+        let foreground = map.get("foreground").unwrap().clone();
+        let ff = apply(img.clone(), foreground).clone();
+        let background = value.get("background").unwrap().clone();
+        let bb = apply(img.clone(), background).clone();
+        let name = item.as_str().unwrap().to_string();
+        return blend_ops::apply_blend(name, ff, bb);
     }
 
     color_ops::apply_ops(img, map)
