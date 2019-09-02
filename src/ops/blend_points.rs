@@ -125,7 +125,7 @@ pub fn blend_pin_light(x1: u8, x2: u8) -> u8 {
 pub fn blend_screen(x1: u8, x2: u8) -> u8 {
     let x1: u16 = x1 as u16;
     let x2: u16 = x2 as u16;
-    (255 - ((255 - x1).wrapping_mul(255 - x2)>>8)) as u8
+    (255 - ((255 - x1).wrapping_mul(255 - x2) >> 8)) as u8
 }
 
 #[allow(dead_code)]

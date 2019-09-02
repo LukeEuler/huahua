@@ -4,10 +4,10 @@ extern crate serde_json;
 use image::RgbaImage;
 use std::process;
 
-mod filters;
+mod blend_ops;
 mod blend_points;
 mod color_ops;
-mod blend_ops;
+mod filters;
 
 pub fn apply(mut img: RgbaImage, value: serde_json::Value) -> RgbaImage {
     if let Some(array) = value.as_array() {

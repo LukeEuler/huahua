@@ -1,14 +1,17 @@
 extern crate image;
 extern crate serde_json;
 
-use image::{imageops, RgbaImage, ConvertBuffer};
-use std::process;
-use std::collections::HashMap;
+use image::{imageops, ConvertBuffer, RgbaImage};
 use ops::filters;
+use std::collections::HashMap;
+use std::process;
 
 pub fn apply_ops(img: RgbaImage, value: serde_json::Map<String, serde_json::Value>) -> RgbaImage {
     let mut ops_map: HashMap<String, ColorOps> = HashMap::new();
-    ops_map.insert("brighten_by_percent".to_string(), ColorOps::BrightenByPercent);
+    ops_map.insert(
+        "brighten_by_percent".to_string(),
+        ColorOps::BrightenByPercent,
+    );
     ops_map.insert("contrast".to_string(), ColorOps::Contrast);
     ops_map.insert("fill_with_channels".to_string(), ColorOps::FillWithChannels);
     ops_map.insert("grayscale".to_string(), ColorOps::Grayscale);

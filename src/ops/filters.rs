@@ -1,13 +1,15 @@
 extern crate image;
 
-use image::{GenericImage, ImageBuffer, Pixel, Rgba};
 use image::math::utils::clamp;
+use image::{GenericImage, ImageBuffer, Pixel, Rgba};
 use ops::blend_points;
 
 #[allow(dead_code)]
 pub fn brighten_by_percent<I, P>(image: &I, value: f32) -> ImageBuffer<P, Vec<u8>>
-    where I: GenericImage<Pixel=P>,
-          P: Pixel<Subpixel=u8> + 'static {
+where
+    I: GenericImage<Pixel = P>,
+    P: Pixel<Subpixel = u8> + 'static,
+{
     let (width, height) = image.dimensions();
     let mut out = ImageBuffer::new(width, height);
 
@@ -17,12 +19,15 @@ pub fn brighten_by_percent<I, P>(image: &I, value: f32) -> ImageBuffer<P, Vec<u8
 
     for y in 0..height {
         for x in 0..width {
-            let e = image.get_pixel(x, y).map_with_alpha(|b| {
-                let c: f32 = b as f32;
-                let d = clamp(c * percent, 0.0, max);
+            let e = image.get_pixel(x, y).map_with_alpha(
+                |b| {
+                    let c: f32 = b as f32;
+                    let d = clamp(c * percent, 0.0, max);
 
-                d as u8
-            }, |alpha| alpha);
+                    d as u8
+                },
+                |alpha| alpha,
+            );
 
             out.put_pixel(x, y, e);
         }
@@ -33,7 +38,9 @@ pub fn brighten_by_percent<I, P>(image: &I, value: f32) -> ImageBuffer<P, Vec<u8
 
 #[allow(dead_code)]
 pub fn sepia<I>(image: &I, intensity: f32) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>> {
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
+{
     let (width, height) = image.dimensions();
     let depth = 20;
     let mut out = ImageBuffer::new(width, height);
@@ -72,8 +79,11 @@ pub fn sepia<I>(image: &I, intensity: f32) -> ImageBuffer<Rgba<u8>, Vec<u8>>
     out
 }
 
-pub fn fill_with_channels(width: u32, height: u32, channels: &[u8; 4]) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-{
+pub fn fill_with_channels(
+    width: u32,
+    height: u32,
+    channels: &[u8; 4],
+) -> ImageBuffer<Rgba<u8>, Vec<u8>> {
     let a = channels[3] as f32;
     let r = ((channels[0] as f32) * a / 255.0) as u8;
     let g = ((channels[1] as f32) * a / 255.0) as u8;
@@ -91,7 +101,9 @@ pub fn fill_with_channels(width: u32, height: u32, channels: &[u8; 4]) -> ImageB
 }
 
 pub fn restore_transparency<I>(image: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>> {
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
+{
     let (width, height) = image.dimensions();
     let mut out = ImageBuffer::new(width, height);
     for y in 0..height {
@@ -108,125 +120,147 @@ pub fn restore_transparency<I>(image: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
 
 #[allow(dead_code)]
 pub fn blend_color_burn<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_color_burn)
 }
 
 #[allow(dead_code)]
 pub fn blend_color_dodge<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_color_dodge)
 }
 
 #[allow(dead_code)]
 pub fn blend_darken<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_darken)
 }
 
 #[allow(dead_code)]
 pub fn blend_difference<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_difference)
 }
 
 #[allow(dead_code)]
 pub fn blend_exclusion<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_exclusion)
 }
 
 #[allow(dead_code)]
 pub fn blend_hard_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_hard_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_lighten<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_lighten)
 }
 
 #[allow(dead_code)]
 pub fn blend_linear_burn<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_linear_burn)
 }
 
 #[allow(dead_code)]
 pub fn blend_linear_dodge<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_linear_dodge)
 }
 
 #[allow(dead_code)]
 pub fn blend_linear_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_linear_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_multiply<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_multiply)
 }
 
 #[allow(dead_code)]
 pub fn blend_over<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_over)
 }
 
 #[allow(dead_code)]
 pub fn blend_overlay<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_overlay)
 }
 
 #[allow(dead_code)]
 pub fn blend_pin_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_pin_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_screen<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_screen)
 }
 
 #[allow(dead_code)]
 pub fn blend_soft_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_soft_light)
 }
 
 #[allow(dead_code)]
 pub fn blend_vivid_light<I>(foreground: &I, background: &I) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     process_blend(foreground, background, &blend_points::blend_vivid_light)
 }
 
-fn process_blend<I>(foreground: &I, background: &I, f: &Fn(u8, u8) -> u8) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>>
+fn process_blend<I>(
+    foreground: &I,
+    background: &I,
+    f: &dyn Fn(u8, u8) -> u8,
+) -> ImageBuffer<Rgba<u8>, Vec<u8>>
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
 {
     let (width, height) = foreground.dimensions();
     let mut out = ImageBuffer::new(width, height);
@@ -297,7 +331,9 @@ fn rgb_to_hls(rgba: &[u8; 4]) -> [f32; 3] {
 
 #[allow(dead_code)]
 pub fn saturate<I>(image: &I, value: f32) -> ImageBuffer<Rgba<u8>, Vec<u8>>
-    where I: GenericImage<Pixel=Rgba<u8>> {
+where
+    I: GenericImage<Pixel = Rgba<u8>>,
+{
     let (width, height) = image.dimensions();
     let mut out = ImageBuffer::new(width, height);
 
