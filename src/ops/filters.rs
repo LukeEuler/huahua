@@ -1,8 +1,6 @@
-extern crate image;
+use image::{math::utils::clamp, GenericImage, ImageBuffer, Pixel, Rgba};
 
-use image::math::utils::clamp;
-use image::{GenericImage, ImageBuffer, Pixel, Rgba};
-use ops::blend_points;
+use super::blend_points;
 
 #[allow(dead_code)]
 pub fn brighten_by_percent<I, P>(image: &I, value: f32) -> ImageBuffer<P, Vec<u8>>

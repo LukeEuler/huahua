@@ -1,6 +1,3 @@
-extern crate image;
-extern crate serde_json;
-
 use image::RgbaImage;
 use std::process;
 

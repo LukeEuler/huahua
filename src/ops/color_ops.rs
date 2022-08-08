@@ -1,10 +1,7 @@
-extern crate image;
-extern crate serde_json;
-
 use image::{imageops, ConvertBuffer, RgbaImage};
-use ops::filters;
-use std::collections::HashMap;
-use std::process;
+use std::{collections::HashMap, process};
+
+use super::filters;
 
 pub fn apply_ops(img: RgbaImage, value: serde_json::Map<String, serde_json::Value>) -> RgbaImage {
     let mut ops_map: HashMap<String, ColorOps> = HashMap::new();
@@ -97,5 +94,5 @@ pub fn do_sepia(img: &RgbaImage, value: serde_json::Value) -> RgbaImage {
 
 pub fn do_grayscale(img: &RgbaImage) -> RgbaImage {
     let out = imageops::grayscale(img);
-    ConvertBuffer::convert(&out)
+    out.convert()
 }

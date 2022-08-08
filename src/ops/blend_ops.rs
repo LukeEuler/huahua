@@ -1,8 +1,7 @@
-extern crate image;
-
 use image::RgbaImage;
-use ops::filters;
 use std::collections::HashMap;
+
+use super::filters;
 
 pub fn apply_blend(name: String, foreground: RgbaImage, background: RgbaImage) -> RgbaImage {
     let mut blend_map: HashMap<String, Blend> = HashMap::new();

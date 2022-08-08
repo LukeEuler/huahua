@@ -1,14 +1,5 @@
-extern crate clap;
-extern crate huahua;
-extern crate image;
-extern crate serde_json;
-
-use std::error::Error;
-use std::fs::File;
-use std::path::Path;
-use std::process;
-
 use clap::{App, Arg};
+use std::{error::Error, fs::File, path::Path, process};
 
 use huahua::ops::apply;
 
@@ -25,7 +16,7 @@ fn args_check() -> (image::DynamicImage, String, serde_json::Value) {
         .about("Apply custom filters to you photos")
         .arg(
             Arg::with_name("input")
-                .short("i")
+                .short('i')
                 .long("input")
                 .value_name("FILE")
                 .help("Path to the input image file")
@@ -33,7 +24,7 @@ fn args_check() -> (image::DynamicImage, String, serde_json::Value) {
         )
         .arg(
             Arg::with_name("output")
-                .short("o")
+                .short('o')
                 .long("output")
                 .value_name("FILE")
                 .help("Output file name")
@@ -41,7 +32,7 @@ fn args_check() -> (image::DynamicImage, String, serde_json::Value) {
         )
         .arg(
             Arg::with_name("filter_config")
-                .short("c")
+                .short('c')
                 .long("config")
                 .value_name("FILE")
                 .help("Set the filter file")
@@ -49,7 +40,7 @@ fn args_check() -> (image::DynamicImage, String, serde_json::Value) {
         )
         .arg(
             Arg::with_name("filter")
-                .short("f")
+                .short('f')
                 .long("filter")
                 .value_name("name")
                 .help("Choose the filter in you filter file")
