@@ -1,6 +1,19 @@
-use image::{math::utils::clamp, GenericImage, ImageBuffer, Pixel, Rgba};
+use image::{GenericImage, ImageBuffer, Pixel, Rgba};
 
 use super::blend_points;
+
+pub fn clamp<N>(a: N, min: N, max: N) -> N
+where
+    N: PartialOrd,
+{
+    if a < min {
+        min
+    } else if a > max {
+        max
+    } else {
+        a
+    }
+}
 
 #[allow(dead_code)]
 pub fn brighten_by_percent<I, P>(image: &I, value: f32) -> ImageBuffer<P, Vec<u8>>
@@ -45,7 +58,7 @@ where
 
     let percent = intensity / 100.0;
     for (x, y, pixel) in out.enumerate_pixels_mut() {
-        let channels = image.get_pixel(x, y).data;
+        let channels = image.get_pixel(x, y).0;
         let mut r = channels[0] as u16;
         let mut g = channels[1] as u16;
         let mut b = channels[2] as u16;
@@ -106,7 +119,7 @@ where
     let mut out = ImageBuffer::new(width, height);
     for y in 0..height {
         for x in 0..width {
-            let mut e = image.get_pixel(x, y).data;
+            let mut e = image.get_pixel(x, y).0;
             e[3] = 255;
 
             out.put_pixel(x, y, *Rgba::from_slice(&e));
@@ -263,8 +276,8 @@ where
     let (width, height) = foreground.dimensions();
     let mut out = ImageBuffer::new(width, height);
     for (x, y, pixel) in out.enumerate_pixels_mut() {
-        let fg_data = foreground.get_pixel(x, y).data;
-        let bg_data = background.get_pixel(x, y).data;
+        let fg_data = foreground.get_pixel(x, y).0;
+        let bg_data = background.get_pixel(x, y).0;
         let final_r = f(fg_data[0], bg_data[0]);
         let final_g = f(fg_data[1], bg_data[1]);
         let final_b = f(fg_data[2], bg_data[2]);
@@ -337,7 +350,7 @@ where
 
     let percent = value / 100.0;
     for (x, y, pixel) in out.enumerate_pixels_mut() {
-        let data = image.get_pixel(x, y).data;
+        let data = image.get_pixel(x, y).0;
         let mut hls = rgb_to_hls(&data);
         hls[2] = saturate_value(hls[2], percent);
         let rgb = hls_to_rgb(&hls, data[3]);

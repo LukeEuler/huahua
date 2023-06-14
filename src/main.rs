@@ -5,7 +5,7 @@ use huahua::ops::apply;
 
 fn main() {
     let (img, output, value) = args_check();
-    let out = apply(img.to_rgba(), value);
+    let out = apply(img.to_rgba8(), value);
     out.save(output).unwrap();
 }
 

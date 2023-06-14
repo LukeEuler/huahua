@@ -5,7 +5,6 @@
 本项目copy了很多[rustagram](https://github.com/ha-shine/rustagram)的源码，主要原因是这个项目的没有将大部分方法对外开放。
 
 
-
 # Usage
 
 目前只支持源码编译。
@@ -34,8 +33,8 @@ OPTIONS:
 本项目也提供了一份默认的滤镜配置文件以供使用：`filter.json`。该配置文件基本是参考的instagram中的滤镜效果（仿自[rustagram](https://github.com/ha-shine/rustagram)）。如果想使用其他滤镜效果，可自行摸索😄。
 
 
-
 如果仅仅想开箱即用，测试效果，可执行项目目录下的`test.sh`文件。当然，至少要保证你本体安装了**rust**，以及有一份**pics/test.jpg**作为滤镜效果的原图。
+
 
 # config文件说明
 
@@ -56,6 +55,7 @@ OPTIONS:
 
 目前的实现细节分为两种，基础滤镜，混合滤镜。事实上，这两者没有本质上的区别。
 
+
 ### basic filter
 
 示例：
@@ -70,11 +70,14 @@ OPTIONS:
 
 每一个`basic filter`和`blend filter`的使用都由一个单独的 json object（或者说map）定义。
 
+
 ### blend filter
 
 // TODO
 
+
 # 滤镜列表
+
 
 ### basic filter
 
@@ -90,6 +93,7 @@ OPTIONS:
 | sepia               | -100~100的浮点数             | 色温                                |
 
 > fill_with_channels 相对比较特殊。她只接受图片的size作为输入，输出一张相同size的图片。原本图片的内容不被保留。一般而言，她都是与`blend filter`配合使用。
+
 
 ### blend filter
 

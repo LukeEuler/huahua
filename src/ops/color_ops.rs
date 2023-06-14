@@ -1,4 +1,4 @@
-use image::{imageops, ConvertBuffer, RgbaImage};
+use image::{buffer::ConvertBuffer, imageops, RgbaImage};
 use std::{collections::HashMap, process};
 
 use super::filters;
